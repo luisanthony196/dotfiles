@@ -8,16 +8,20 @@ plugins=(
 # Cargar configuracion de oh-my-zsh
 source $ZSH/oh-my-zsh.sh
 # Cargar colores para ls
-source $ZDOTDIR/lscolors.sh
+source $ZDOTDIR/config/lscolors.sh
 # Cargar herramienta fzf
-source $ZDOTDIR/fzf.zsh
+source $ZDOTDIR/config/fzf.zsh
 # Cargar herencia en tilix
-source $ZDOTDIR/tilix.zsh
+source $ZDOTDIR/config/tilix.zsh
 # Cargar config para completacion
-source $ZDOTDIR/completion.zsh
+source $ZDOTDIR/config/completion.zsh
 # Cargar alias personales
-source $ZDOTDIR/aliases.zsh
+source $ZDOTDIR/config/aliases.zsh
 # Crear archivos con determinados permisos (second hdd)
 umask 000
 # Opciones zsh
 setopt HIST_SAVE_NO_DUPS
+# Funcion de prueba
+function hello(){
+  echo 'Hello world'
+}

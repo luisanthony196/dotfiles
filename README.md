@@ -3,48 +3,58 @@
 ## Advertencias
 
 Esta configuracion necesita de las siguientes dependencias
-- zsh
-- [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh)
-- [fzf](https://github.com/junegunn/fzf)
+- zsh (desde el instalador de paquetes)
+- [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh) (se muestra como instalar)
+- [fzf](https://github.com/junegunn/fzf) (se muestra como instalar)
+- neofetch (opcional)
 
 ## Instalacion
 
-Instalacion de dependencias y administracion de archivos
+Instalacion de dependencias
 ```bash
-# Instalacion de zsh (configuracion vacia)
+# Instalacion de zsh (configuracion vacia) ---
 sudo apt install zsh
+# Instalacion de oh-my-zsh ---
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+# Instalacion fzf ---
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.config/fzf
+./.config/fzf/install
+# Agregamos plugins externos ---
+git clone --depth 1 https://github.com/zsh-users/zsh-autosuggestions .oh-my-zsh/custom/plugins/zsh-autosuggestions
+git clone --depth 1 https://github.com/zsh-users/zsh-syntax-highlighting.git .oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+# Clona el repositorio en la carpeta `~/.config/zsh/` ---
+git clone https://github.com/luisanthony196/dotfiles.git ~/.config/zsh
+```
+Configuramos el shell por defecto
+
+```bash
 # Definimos el shell por defecto (sin sudo)
 chsh -s $(which zsh)
-# Instalamos oh-my-zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-# Agregamos plugins externos
-git clone https://github.com/zsh-users/zsh-autosuggestions .config/oh-my-zsh/custom/plugins/zsh-autosuggestions
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git .config/oh-my-zsh/custom/plugins/zsh-syntax-highlighting
-# Eliminamos configuracion inicial
+```
+
+Administramos los archivos sin uso
+
+```bash
+# Movemos la carpeta de oh-my-zsh
+mv ~/.oh-my-zsh ~/.config/oh-my-zsh
+# Eliminamos archivos sin uso
 cd ~
-rm .zshrc .zshrc.pre-oh-my-zsh
-mv .oh-my-zsh .config/oh-my-zsh
-# Instalamos fzf
-git clone https://github.com/junegunn/fzf.git ~/.config/fzf
-source ~/.config/fzf/install
-# Eliminamos configuracion fzf
-rm .bashrc .zshrc .fzf.zsh .fzf.bash
-# Clona el repositorio en la carpeta `~/.config/zsh/`
-git clone https://github.com/luisanthony196/dotfiles.git ~/.config/zsh
-# Al clonar nos dirigimos a la carpeta
-cd ~/.config/zsh
+rm .zshrc .zshrc.pre-oh-my-zsh .bashrc .bash_logout .bash_history .profile .fzf.zsh .fzf.bash
 ```
 
 ## Configuracion de archivos de configuracion
 
-Creacion de enlaces y carga de configuracion
+Para una configuacion de los dotfiles, debemos usar unos cuantos enlaces simbolicos, ademas nos apoyaremos de variables de entorno declaradas en zshenv para usar los ficheros de configuracion en otras carpetas
 ```bash
-# Creacion del enlace simbolico
-ln -s zshenv $HOME/.zshenv
-# Movemos el historial
-mv ~/.zsh_history ./histfile
-# Hacemos el enlace simbolico del tema
-ls -s ./example.zsh-theme ~/.config/oh-my-zsh/custom/themes/
-# Si se tiene neofetch
-ls -s ./config.conf ~/.config/neofetch/
+# Agregamos el zshenv
+cd ~
+ln -s .config/zsh/symlink/zshenv .zshenv
+# Agregamos el tema del prompt
+cd ~/.config/oh-my-zsh/custom/themes
+rm example.zsh-theme
+ls -s ~/.config/zsh/symlink/example.zsh-theme
+# Agregamos configuracion del neofetch
+cd ~/.config/neofetch
+rm config.conf
+ls -s ~/.config/zsh/symlink/config.conf
 ```
