@@ -2,11 +2,14 @@
 
 # Prompt, prompt plus and end prompt
 PROMPT="%(?:%{$FG[118]%}:%{$fg_bold[red]%})"
-PROMPT+=' %{$FG[118]%}%c%{$reset_color%} $(git_prompt_info)'
+PROMPT+='$(virtualenv_prompt_info) %{$FG[118]%}%c%{$reset_color%} $(git_prompt_info)'
 RPROMPT='${return_status}$(git_prompt_status)%{$reset_color%}'
 # After and before from git prompt
 ZSH_THEME_GIT_PROMPT_PREFIX="%{$FG[171]%} "
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%} "
+# After and before from virtualenv prompt
+ZSH_THEME_VIRTUALENV_PREFIX="%{$reset_color%} ["
+ZSH_THEME_VIRTUALENV_SUFFIX="%{$reset_color%}]"
 # God or bad if repository is commited
 ZSH_THEME_GIT_PROMPT_CLEAN="%{$FG[118]%} "
 ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg_bold[red]%} "
