@@ -7,5 +7,3 @@ fi
 # Key bindings
 # ------------
 source "$HOME/.config/fzf/shell/key-bindings.zsh"
-
-export FZF_CTRL_R_OPTS="--layout reverse"

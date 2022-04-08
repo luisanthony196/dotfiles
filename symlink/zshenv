@@ -14,3 +14,8 @@ export HISTFILE="$XDG_CONFIG_HOME/zsh/histfile"
 export EDITOR="nvim"
 # Tema personalizado de oh-my-zsh
 export ZSH_THEME="example"
+# Define como se muestra la lista en las apps que usan fzf
+export FZF_DEFAULT_OPTS='--height 35% --layout=reverse --border'
+#Tamanio del historial
+export HISTSIZE=10000
+export SAVEHIST=10000

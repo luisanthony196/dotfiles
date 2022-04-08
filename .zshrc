@@ -2,6 +2,7 @@
 plugins=(
   git
   virtualenv
+  kubectl
   zsh-vi-mode
   zsh-autosuggestions
   zsh-syntax-highlighting
