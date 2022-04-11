@@ -9,7 +9,7 @@ Esta configuracion necesita de las siguientes dependencias
 - neofetch (opcional)
 - [nerd fonts](https://www.nerdfonts.com/) (descargar una fuente e instalar)
 
-## Instalacion
+## Instalacion de ZSH
 
 Instalacion de dependencias
 ```bash
@@ -20,9 +20,6 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 # Instalacion fzf ---
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.config/fzf
 ./.config/fzf/install
-# Agregamos plugins externos ---
-git clone --depth 1 https://github.com/zsh-users/zsh-autosuggestions .oh-my-zsh/custom/plugins/zsh-autosuggestions
-git clone --depth 1 https://github.com/zsh-users/zsh-syntax-highlighting.git .oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 # Clona el repositorio en la carpeta `~/.config/zsh/` ---
 git clone https://github.com/luisanthony196/dotfiles.git ~/.config/zsh
 ```
@@ -66,4 +63,24 @@ Casi por terminar el proceso, es recomendable cerrar la terminal y eliminar los 
 ```bash
 cd ~
 rm .zsh_history .zcompdump*
+```
+
+Ahora, en caso de que se desee utilizar plugins en zsh, descargamos sus repos en la carpeta 'custo/themes', en caso de no desear uno de los plugins listados en `.zshrc` entonces comentar o eliminar esa linea
+
+```bash
+# Descargamos los plugins ---
+cd ~/.config/oh-my-zsh/custom/plugins/
+git clone --depth 1 https://github.com/zsh-users/zsh-autosuggestions
+git clone --depth 1 https://github.com/zsh-users/zsh-syntax-highlighting.git
+git clone --depth 1 https://github.com/jeffreytse/zsh-vi-mode
+```
+
+## Instalacion de Kitty
+
+Configuracion de kitty para uso en root, detallado en las [faq](https://sw.kovidgoyal.net/kitty/faq/#keys-such-as-arrow-keys-backspace-delete-home-end-etc-do-not-work-when-using-su-or-sudo)
+
+```bash
+sudo nvim /etc/sudoers
+# En las configuraciones de 'Defaults' agregar
+Defaults env_keep+="TERM TERMINFO"
 ```

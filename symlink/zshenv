@@ -13,7 +13,7 @@ export HISTFILE="$XDG_CONFIG_HOME/zsh/histfile"
 # Editor por defecto en git
 export EDITOR="nvim"
 # Tema personalizado de oh-my-zsh
-export ZSH_THEME="example"
+export ZSH_THEME="exam-fork"
 # Define como se muestra la lista en las apps que usan fzf
 export FZF_DEFAULT_OPTS='--height 35% --layout=reverse --border'
 #Tamanio del historial
