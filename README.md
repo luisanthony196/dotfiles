@@ -47,15 +47,15 @@ Para una configuacion de los dotfiles, debemos usar unos cuantos enlaces simboli
 ```bash
 # Agregamos el zshenv
 cd ~
-ln -s .config/zsh/symlink/zshenv .zshenv
+ln -s .config/zsh/.zshenv
 # Agregamos el tema del prompt
 cd ~/.config/oh-my-zsh/custom/themes
 rm example.zsh-theme
-ln -s ~/.config/zsh/symlink/example.zsh-theme
+ln -s ~/.config/zsh/themes/exam-fork.zsh-theme
 # Agregamos configuracion del neofetch
 cd ~/.config/neofetch
 rm config.conf
-ln -s ~/.config/zsh/symlink/config.conf
+ln -s ~/.config/zsh/neofetch/config.conf
 ```
 
 Casi por terminar el proceso, es recomendable cerrar la terminal y eliminar los archivos restantes

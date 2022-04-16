@@ -9,7 +9,7 @@ export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 # Carpeta de oh-my-zsh
 export ZSH="$XDG_CONFIG_HOME/oh-my-zsh"
 # Archivo de historial de zsh
-export HISTFILE="$XDG_CONFIG_HOME/zsh/histfile"
+export HISTFILE="$ZDOTDIR/histfile"
 # Editor por defecto en git
 export EDITOR="nvim"
 # Tema personalizado de oh-my-zsh
@@ -19,3 +19,5 @@ export FZF_DEFAULT_OPTS='--height 35% --layout=reverse --border'
 #Tamanio del historial
 export HISTSIZE=10000
 export SAVEHIST=10000
+# Lspconfig
+export WORKSPACE="$HOME/.workspace"
