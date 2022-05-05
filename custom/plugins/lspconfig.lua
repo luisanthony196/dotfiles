@@ -1,45 +1,16 @@
 local M = {}
 
 M.setup_lsp = function(attach, capabilities)
-   local lsp_installer = require "nvim-lsp-installer"
+   local lspconfig = require "lspconfig"
 
-   lsp_installer.settings {
-      ui = {
-         icons = {
-            server_installed = "﫟" ,
-            server_pending = "",
-            server_uninstalled = "✗",
-         },
-      },
-   }
+   local servers = { "html", "cssls", "emmet_ls", "tsserver", "sumneko_lua", "eslint", "pyright" }
 
-   lsp_installer.on_server_ready(function(server)
-      local opts = {
+   for _, lsp in ipairs(servers) do
+      lspconfig[lsp].setup {
          on_attach = attach,
          capabilities = capabilities,
-         flags = {
-            debounce_text_changes = 150,
-         },
-         settings = {},
       }
-
-      if server.name == "emmet_ls" then
-        opts.filetypes = {
-          'html', 'css', 'javascript'
-        }
-      end
-
-      if server.name == "tsserver" then
-        opts.init_options = {
-            preferences = {
-              -- disableSuggestions = true
-            }
-        }
-      end
-
-      server:setup(opts)
-      vim.cmd [[ do User LspAttachBuffers ]]
-   end)
+   end
 end
 
 return M

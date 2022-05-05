@@ -1,32 +1,30 @@
 local M = {}
 
+local plugin_conf = require "custom.plugins.configs"
 local userPlugins = require "custom.plugins"
 
 M.plugins = {
-  install = userPlugins,
-  status = {
-    better_escape = false, -- map to <ESC> with no lag
-  },
   options = {
     lspconfig = {
       setup_lspconf = "custom.plugins.lspconfig"
     },
   },
-  default_plugin_config_replace = {
-    nvim_tree = {
-      -- auto_close = true,
-      view = {
-        side = "right",
-        width = 20,
-      },
-    },
-  }
+  override = {
+    ["kyazdani42/nvim-tree.lua"] = plugin_conf.nvimtree,
+    ["nvim-treesitter/nvim-treesitter"] = plugin_conf.treesitter
+  },
+  remove = {
+    "max397574/better-escape.nvim",
+    "NvChad/nvterm"
+  },
+  user = userPlugins,
 }
 
 M.ui = {
   theme = "tokyonight",
-  hl_override = "custom.colors.override", -- path of your file that contains highlights
-  transparency = false,
+  hl_override = {
+    Folded = { fg="#ffffff", bg = "#40404a" },
+  },
 }
 
 return M
