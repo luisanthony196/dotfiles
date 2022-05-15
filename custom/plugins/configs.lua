@@ -21,7 +21,8 @@ M.treesitter = {
 M.nvimtree = {
   view = {
     side = "right",
-    width = 20
+    width = 20,
+    signcolumn = "no"
   }
 }
 

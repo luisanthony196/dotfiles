@@ -61,3 +61,8 @@ function mkcd() {
 function zvm_after_init() {
   source $ZDOTDIR/config/fzf.zsh
 }
+# Atajo para cheatsheet
+function cht ()
+{
+  curl cht.sh/$1 | bat
+}

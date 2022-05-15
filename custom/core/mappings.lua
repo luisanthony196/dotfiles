@@ -1,13 +1,36 @@
-local map = require("core.utils").map
+local M = {}
 
--- F1 y F2 para guardar y cerrar
-map("n", "<F1>", ":w <CR>")
-map("n", "<F2>", ":q <CR>")
--- Copiar y pegar en el portapapeles
-map("v", "<leader>y", "\"*y")
-map("n", "<leader>p", "\"*p")
--- Doblar por identacion
-map("n", "<leader><TAB>", "za")
--- Habilitar permisos en los ileibles
-map("n", "<F5>", ":SudaRead <CR>")
-map("n", "<leader>g", ":Gitsigns preview_hunk <CR>")
+M.disabled = {
+  n = {
+    ["<leader>v"] = "",
+  }
+}
+
+M.general = {
+  n = {
+    ["<F1>"] = { ":w <CR>", "﬚  save file" },
+    ["<F2>"] = { ":bufdo bf | q <CR>", "   close all" },
+    ["<F5>"] = { ":SudaRead <CR>", "   root permission" },
+    -- ["<leader>h"] = { ":Gitsigns preview_hunk <CR>", " preview hunk" },
+    ["<leader><TAB>"] = { "za", "   toggle fold" },
+    ["<CR>"] = { ":noh<CR><CR>", "clear search" },
+  },
+  v = {
+    ["<leader>y"] = { "\"*y", "   copy to clipboard" },
+  }
+}
+
+M.telescope = {
+  n = {
+    ["<leader>p"] = { "\"*p", "   paste from clipboard" },
+  }
+}
+
+M.nvterm = {
+  n = {
+    ["<leader>h"] = { ":Gitsigns preview_hunk <CR>", "   preview hunk" },
+    ["<leader>v"] = "",
+  }
+}
+
+return M

@@ -22,9 +22,13 @@ M.plugins = {
 
 M.ui = {
   theme = "tokyonight",
+  theme_toggle = { "tokyonight", "one_light" },
   hl_override = {
-    Folded = { fg="#ffffff", bg = "#40404a" },
+    Folded = { fg="white", bg = "one_bg3" },
+    Comment = { fg="vibrant_green" }
   },
 }
+
+M.mappings = require "custom.core.mappings"
 
 return M
