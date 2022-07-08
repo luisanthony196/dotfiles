@@ -21,3 +21,4 @@ export HISTSIZE=10000
 export SAVEHIST=10000
 # Lspconfig
 export WORKSPACE="$HOME/.workspace"
+export M2_HOME="/usr/share/maven"

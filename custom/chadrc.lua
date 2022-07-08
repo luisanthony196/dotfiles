@@ -15,7 +15,7 @@ M.plugins = {
   },
   remove = {
     "max397574/better-escape.nvim",
-    "NvChad/nvterm"
+    "NvChad/nvterm",
   },
   user = userPlugins,
 }
