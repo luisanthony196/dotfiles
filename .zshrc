@@ -1,8 +1,6 @@
 # Plugins de oh-my-zsh
 plugins=(
   git
-  virtualenv
-  kubectl
   zsh-vi-mode
   zsh-autosuggestions
   zsh-syntax-highlighting
@@ -14,13 +12,21 @@ source $ZDOTDIR/config/lscolors.sh
 # Cargar herramienta fzf
 source $ZDOTDIR/config/fzf.zsh
 # Cargar herencia en tilix
-source $ZDOTDIR/config/tilix.zsh
+# source $ZDOTDIR/config/tilix.zsh
+# Cargar nvm
+source $ZDOTDIR/config/nvm.zsh
 # Cargar config para completacion
 source $ZDOTDIR/config/completion.zsh
 # Cargar alias personales
 source $ZDOTDIR/config/aliases.zsh
+# Cargar conda
+source $ZDOTDIR/config/conda.zsh
+# Cargar maven
+source $ZDOTDIR/config/maven.zsh
 # Crear archivos con determinados permisos (second hdd)
-umask 000
+# ~ fstab [permission] Activado, mantiene permisos
+# ~ fstab [default] Desactivado, todos los permisos activados por defecto
+# umask 000
 # No permite el historial duplicado
 setopt HIST_SAVE_NO_DUPS
 # Extraer en el lugar los archivos comprimidos

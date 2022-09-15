@@ -1,6 +1,6 @@
 # Archivos de configuracion
 export XDG_CONFIG_HOME="$HOME/.config"
-# Archivos de datos
+# Archivos de datos - genera error
 # export XDG_DATA_HOME="$XDG_CONFIG_HOME/local/share"
 # Ubicacion para la cache de las aplicaciones
 # export XDG_CACHE_HOME="$XDG_CONFIG_HOME/cache"
@@ -16,9 +16,6 @@ export EDITOR="nvim"
 export ZSH_THEME="exam-fork"
 # Define como se muestra la lista en las apps que usan fzf
 export FZF_DEFAULT_OPTS='--height 35% --layout=reverse --border'
-#Tamanio del historial
+# Tamanio del historial
 export HISTSIZE=10000
 export SAVEHIST=10000
-# Lspconfig
-export WORKSPACE="$HOME/.workspace"
-export M2_HOME="/usr/share/maven"
