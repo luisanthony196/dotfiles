@@ -72,3 +72,10 @@ function cht ()
 {
   curl cht.sh/$1 | bat
 }
+# Traduccion rapida
+function entes () {
+  trans -b en:es $1
+}
+function esten () {
+  trans -b es:en $1
+}
