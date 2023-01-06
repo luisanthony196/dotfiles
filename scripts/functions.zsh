@@ -1,3 +1,7 @@
+# Habilita automaticamente fzf si se tiene zvm
+function zvm_after_init() {
+  source $ZDOTDIR/scripts/fzf.zsh
+}
 # Extraer en el lugar los archivos comprimidos
 function extract(){
   if [ -f $1 ]; then
@@ -31,10 +35,6 @@ function dock() {
 # Crear una carpeta y entrar
 function mkcd() {
   mkdir -p $1; cd $1
-}
-# Habilita automaticamente fzf si se tiene zvm
-function zvm_after_init() {
-  source $ZDOTDIR/config/fzf.zsh
 }
 # Atajo para cheatsheet
 function cht ()

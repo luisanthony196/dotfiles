@@ -19,3 +19,7 @@ export FZF_DEFAULT_OPTS='--height 35% --layout=reverse --border'
 # Tamanio del historial
 export HISTSIZE=10000
 export SAVEHIST=10000
+# Agregar los binarios de mi usuario al path
+typeset -U path PATH
+path=(~/.local/bin $path)
+export PATH

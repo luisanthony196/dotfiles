@@ -8,25 +8,25 @@ plugins=(
 # Cargar configuracion de oh-my-zsh
 source $ZSH/oh-my-zsh.sh
 # Cargar alias personales
-source $ZDOTDIR/config/aliases.zsh
+source $ZDOTDIR/scripts/aliases.zsh
 # Cargar funciones personales
-source $ZDOTDIR/config/functions.zsh
+source $ZDOTDIR/scripts/functions.zsh
 # Cargar colores para ls
-source $ZDOTDIR/config/lscolors.sh
+source $ZDOTDIR/scripts/lscolors.sh
 # Cargar herramienta fzf
-source $ZDOTDIR/config/fzf.zsh
+source $ZDOTDIR/scripts/fzf.zsh
 # Cargar herencia en tilix
 # source $ZDOTDIR/config/tilix.zsh
 # Cargar nvm
-source $ZDOTDIR/config/nvm.zsh
+source $ZDOTDIR/scripts/nvm.zsh
 # Cargar config para completacion
-source $ZDOTDIR/config/completion.zsh
+source $ZDOTDIR/scripts/completion.zsh
 # Cargar alias personales
-source $ZDOTDIR/config/aliases.zsh
+source $ZDOTDIR/scripts/aliases.zsh
 # Cargar conda
-source $ZDOTDIR/config/conda.zsh
+source $ZDOTDIR/scripts/conda.zsh
 # Cargar maven
-source $ZDOTDIR/config/maven.zsh
+source $ZDOTDIR/scripts/maven.zsh
 # Crear archivos con determinados permisos (second hdd)
 # ~ fstab [permission] Activado, mantiene permisos
 # ~ fstab [default] Desactivado, todos los permisos activados por defecto
