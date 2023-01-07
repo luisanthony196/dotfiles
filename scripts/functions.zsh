@@ -1,7 +1,3 @@
-# Habilita automaticamente fzf si se tiene zvm
-function zvm_after_init() {
-  source $ZDOTDIR/scripts/fzf.zsh
-}
 # Extraer en el lugar los archivos comprimidos
 function extract(){
   if [ -f $1 ]; then

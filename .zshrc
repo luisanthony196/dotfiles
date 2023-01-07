@@ -33,3 +33,9 @@ source $ZDOTDIR/scripts/maven.zsh
 # umask 000
 # No permite el historial duplicado
 setopt HIST_SAVE_NO_DUPS
+# Activar the fuck
+eval $(thefuck --alias)
+# Habilita automaticamente fzf si se tiene zvm
+function zvm_after_init() {
+  source $ZDOTDIR/scripts/fzf.zsh
+}

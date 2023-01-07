@@ -4,6 +4,7 @@
 
 Esta configuracion necesita de las siguientes dependencias
 - zsh (desde el instalador de paquetes)
+- the fuck (desde el instalador de paquetes)
 - [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh) (se muestra como instalar)
 - [fzf](https://github.com/junegunn/fzf) (se muestra como instalar)
 - neofetch (opcional)
@@ -15,6 +16,8 @@ Instalacion de dependencias
 ```bash
 # Instalacion de zsh (configuracion vacia) ---
 sudo apt install zsh
+# Instalacion de the fuck
+sudo apt install thefuck
 # Instalacion de oh-my-zsh ---
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 # Instalacion fzf ---
@@ -55,7 +58,7 @@ ln -s ~/.config/zsh/themes/exam-fork.zsh-theme
 # Agregamos configuracion del neofetch
 cd ~/.config/neofetch
 rm config.conf
-ln -s ~/.config/zsh/neofetch/config.conf
+ln -s ~/.config/zsh/config/neofetch/config.conf
 ```
 
 Casi por terminar el proceso, es recomendable cerrar la terminal y eliminar los archivos restantes
@@ -78,6 +81,7 @@ git clone --depth 1 https://github.com/jeffreytse/zsh-vi-mode
 ## Instalacion de Kitty
 
 Configuracion de kitty para uso en root, detallado en las [faq](https://sw.kovidgoyal.net/kitty/faq/#keys-such-as-arrow-keys-backspace-delete-home-end-etc-do-not-work-when-using-su-or-sudo)
+- No es necesario utilizarlo, esta seccion deberia de ir en otro markdown
 
 ```bash
 sudo nvim /etc/sudoers
