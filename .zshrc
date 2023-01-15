@@ -32,9 +32,7 @@ source $ZDOTDIR/scripts/maven.zsh
 # ~ fstab [default] Desactivado, todos los permisos activados por defecto
 # umask 000
 # No permite el historial duplicado
-setopt HIST_SAVE_NO_DUPS
-# Activar the fuck
-eval $(thefuck --alias)
+setopt HIST_IGNORE_ALL_DUPS
 # Habilita automaticamente fzf si se tiene zvm
 function zvm_after_init() {
   source $ZDOTDIR/scripts/fzf.zsh

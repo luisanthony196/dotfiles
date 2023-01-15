@@ -1,13 +1,7 @@
-# Archivos de configuracion
-export XDG_CONFIG_HOME="$HOME/.config"
-# Archivos de datos - genera error
-# export XDG_DATA_HOME="$XDG_CONFIG_HOME/local/share"
-# Ubicacion para la cache de las aplicaciones
-# export XDG_CACHE_HOME="$XDG_CONFIG_HOME/cache"
 # Carpeta para archivos de zsh
-export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+export ZDOTDIR="$HOME/.config/zsh"
 # Carpeta de oh-my-zsh
-export ZSH="$XDG_CONFIG_HOME/oh-my-zsh"
+export ZSH="$HOME/.config/oh-my-zsh"
 # Archivo de historial de zsh
 export HISTFILE="$ZDOTDIR/histfile"
 # Editor por defecto en git

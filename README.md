@@ -88,3 +88,6 @@ sudo nvim /etc/sudoers
 # En las configuraciones de 'Defaults' agregar
 Defaults env_keep+="TERM TERMINFO"
 ```
+
+## Notas
+- En un inicio se utilizafa los directorios XDG, para modificar el comportamiento de los archivos dotfiles; sin embargo, fue contraproducente en ciertos casos por lo que se dejara de usar
