@@ -12,8 +12,9 @@ export ZSH_THEME="exam-fork"
 export FZF_DEFAULT_OPTS='--height 35% --layout=reverse --border'
 # Tamanio del historial
 export HISTSIZE=10000
+# Mantiene el historial entre sesiones de shell
 export SAVEHIST=10000
-# Agregar los binarios de mi usuario al path
-typeset -U path PATH
-path=(~/.local/bin $path)
-export PATH
+# Solucion de problemas para ZVM
+export ZVM_INIT_MODE="sourcing"
+# Ubicacion del HOME de maven
+export M2_HOME="/usr/share/maven"
