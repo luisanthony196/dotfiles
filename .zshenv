@@ -16,5 +16,3 @@ export HISTSIZE=10000
 export SAVEHIST=10000
 # Solucion de problemas para ZVM
 export ZVM_INIT_MODE="sourcing"
-# Ubicacion del HOME de maven
-export M2_HOME="/usr/share/maven"

@@ -1,4 +1,4 @@
 .zcompdump*
 histfile
 load/*
-!load/autostart.zsh
+!load/examples/

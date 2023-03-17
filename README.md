@@ -1,93 +1,127 @@
 # DOTFILES
 
-## Advertencias
+Con el objetivo de tener la carpeta de inicio de linux lo mas limpia posible y los archivos de configuración ordenados, se creo este repositorio que lista los programas, comandos y archivos de configuración necesarios para llegar al objetivo.
 
-Esta configuracion necesita de las siguientes dependencias
-- zsh (desde el instalador de paquetes)
-- the fuck (desde el instalador de paquetes)
-- [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh) (se muestra como instalar)
-- [fzf](https://github.com/junegunn/fzf) (se muestra como instalar)
-- neofetch (opcional)
-- [nerd fonts](https://www.nerdfonts.com/) (descargar una fuente e instalar)
+## Requisitos
 
-## Instalacion de ZSH
+- `zsh`
+- `fzf`
+- `git`
+- [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh) framework para fzf
+- [nerd fonts](https://www.nerdfonts.com) fuentes parchadas para usar 'iconic fonts'
 
-Instalacion de dependencias
+## Dependencias opcionales
+- [homebrew](https://www.brew.sh) gestor de paquetes para mac y linux
+- `bat`
+- `exa`
+- `neovim`
+- `zoxide`
+- `neofetch`
+
+## Instalación
+
+### Clonar el repositorio
+
+En primer lugar se debe tener ya instalado `git` para clonar el repositorio en su destino
+
 ```bash
-# Instalacion de zsh (configuracion vacia) ---
-sudo apt install zsh
-# Instalacion de the fuck
-sudo apt install thefuck
-# Instalacion de oh-my-zsh ---
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-# Instalacion fzf ---
-git clone --depth 1 https://github.com/junegunn/fzf.git ~/.config/fzf
-./.config/fzf/install
-# Clona el repositorio en la carpeta `~/.config/zsh/` ---
 git clone https://github.com/luisanthony196/dotfiles.git ~/.config/zsh
 ```
-Configuramos el shell por defecto
+
+### Instalación de zsh
+
+Al cambiar el `SHELL` del sistema es recomendable cerrar y abrir la terminal para ver los cambios
 
 ```bash
+# zsh y los componentes necesarios
+sudo apt install zsh
 # Definimos el shell por defecto (sin sudo)
 chsh -s $(which zsh)
 ```
 
-Administramos los archivos sin uso
+### Instalación de Oh-my-zsh
+
+También puedes instalarlo siguiendo los pasos en su [pagina oficial](https://ohmyz.sh/), se debe recordar mover su carpeta a la que se indica en el comando
 
 ```bash
+# Comando de pagina oficial
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 # Movemos la carpeta de oh-my-zsh
 mv ~/.oh-my-zsh ~/.config/oh-my-zsh
-# Eliminamos archivos sin uso
-cd ~
-rm .zshrc .zshrc.pre-oh-my-zsh .bashrc .shell.pre-oh-my-zsh .bash_logout .bash_history .profile .fzf.zsh .fzf.bash
 ```
 
-## Configuracion de los ficheros
+### Instalación de fzf
 
-Para una configuacion de los dotfiles, debemos usar unos cuantos enlaces simbolicos, ademas nos apoyaremos de variables de entorno declaradas en zshenv para usar los ficheros de configuracion en otras carpetas
+Puedes también instalarlo de forma manual con git, las instrucciones están en su [repositorio](https://github.com/junegunn/fzf). Es ese caso solo debes recordar mover el fichero generado a la carpeta `load`
 
 ```bash
-# Agregamos el zshenv
-cd ~
-ln -s .config/zsh/.zshenv
-# Agregamos el tema del prompt
-cd ~/.config/oh-my-zsh/custom/themes
-rm example.zsh-theme
-ln -s ~/.config/zsh/themes/exam-fork.zsh-theme
-# Agregamos configuracion del neofetch
-cd ~/.config/neofetch
-rm config.conf
-ln -s ~/.config/zsh/config/neofetch/config.conf
+# Usando el gestor de paquetes brew
+brew install fz
+# Habilitamos los keybindings
+$(brew --prefix)/opt/fzf/install
+# Movemos el script a la carpeta en el que se cargara automaticamente
+mv ~/.fzf.zsh ~/.config/zsh/load
 ```
 
-Casi por terminar el proceso, es recomendable cerrar la terminal y eliminar los archivos restantes
+### Administramos los archivos sin uso
+
+Para evitar la perdida de configuraciones desarrolladas por el usuario, se moverán los archivos a una carpeta que se deberá de eliminar después
 
 ```bash
-cd ~
-rm .zsh_history .zcompdump*
+# Primero creamos un backup
+cd ~ && mkdir .trash
+# Movemos todos los archivos a la ubicacion ~/.trash
+mv -f .zshrc .zshrc.pre-oh-my-zsh .bashrc .shell.pre-oh-my-zsh .bash_logout .bash_history .profile .fzf.zsh .fzf.bash .trash
 ```
 
-Ahora, en caso de que se desee utilizar plugins en zsh, descargamos sus repos en la carpeta 'custo/themes', en caso de no desear uno de los plugins listados en `.zshrc` entonces comentar o eliminar esa linea
+### Descarga de plugins
+
+Cuando se desee instalar plugins adicionales, es necesario recordar instalarlos en su nueva ubicación y agregar sus nombres en el archivo `.zshrc`
 
 ```bash
-# Descargamos los plugins ---
+# Plugins que se usan en esta configuracion
 cd ~/.config/oh-my-zsh/custom/plugins/
 git clone --depth 1 https://github.com/zsh-users/zsh-autosuggestions
 git clone --depth 1 https://github.com/zsh-users/zsh-syntax-highlighting.git
 git clone --depth 1 https://github.com/jeffreytse/zsh-vi-mode
 ```
 
-## Instalacion de Kitty
+## Configuración de los ficheros
 
-Configuracion de kitty para uso en root, detallado en las [faq](https://sw.kovidgoyal.net/kitty/faq/#keys-such-as-arrow-keys-backspace-delete-home-end-etc-do-not-work-when-using-su-or-sudo)
-- No es necesario utilizarlo, esta seccion deberia de ir en otro markdown
+Para la optima configuración de los dotfiles, debemos usar unos cuantos enlaces simbólicos, ademas nos apoyaremos de variables de entorno declaradas en `.zshenv`, lo que nos permitirá usar los ficheros del repositorio en nuestra configuración personal
 
 ```bash
-sudo nvim /etc/sudoers
-# En las configuraciones de 'Defaults' agregar
-Defaults env_keep+="TERM TERMINFO"
+# Agregamos el zshenv
+cd ~
+ln -s .config/zsh/.zshenv
+# Agregamos el tema del prompt
+cd ~/.config/oh-my-zsh/custom/themes && rm example.zsh-theme
+ln -s ~/.config/zsh/themes/exam-fork.zsh-theme
 ```
 
-## Notas
-- En un inicio se utilizafa los directorios XDG, para modificar el comportamiento de los archivos dotfiles; sin embargo, fue contraproducente en ciertos casos por lo que se dejara de usar
+Casi por terminar el proceso, es recomendable cerrar la terminal y eliminar los archivos que posiblemente se generen y no nos sean de utilidad
+
+```bash
+cd ~ && rm -f .zsh_history .zcompdump*
+```
+
+## Programas adicionales
+
+- `kitty` terminal que aprovecha el uso de gpu
+
+  ```bash
+  # Agregamos configuracion de kitty
+  cd ~/.config/kitty && rm -f kitty.conf
+  ln -s ~/.config/zsh/config/kitty/kitty.conf
+  ln -s ~/.config/zsh/config/kitty/color.ini
+  ```
+
+- `neofetch` muestra información del sistema
+
+  ```bash
+  # Agregamos configuracion del neofetch
+  cd ~/.config/neofetch && rm -f config.conf
+  ln -s ~/.config/zsh/config/neofetch/config.conf
+  ```
+
+  

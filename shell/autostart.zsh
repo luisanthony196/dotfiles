@@ -2,8 +2,10 @@
 # si se desea ejecutar por separado este script, agregar en
 # la primera fila el interprete #!/bin/zsh
 folder="$ZDOTDIR/load"
-for file in $(ls $folder | grep -v "autostart.zsh")
-do
-  source $folder/$file
-done
+if [ -d "$folder" ]; then
+  for file in $(ls $folder)
+  do
+    source $folder/$file
+  done
+fi
 unset folder file
