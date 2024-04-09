@@ -16,3 +16,5 @@ export HISTSIZE=10000
 export SAVEHIST=10000
 # Solucion de problemas para ZVM
 export ZVM_INIT_MODE="sourcing"
+# Desactivar el prompt de entorno virtual de python
+export VIRTUAL_ENV_DISABLE_PROMPT=1

@@ -27,7 +27,7 @@ ZSH_THEME_GIT_PROMPT_AHEAD="%{$fg[yellow]%} "
 # Conda prompt
 # Need: conda config --set changeps1 False
 function python_env() {
-  local env="${VIRTUAL_ENV:-$CONDA_DEFAULT_ENV}"
+  local env="${VIRTUAL_ENV_PROMPT:-$CONDA_DEFAULT_ENV}"
   if [[ -n $env ]] && [[ $env != "base" ]]; then
     echo "%{$fg[yellow]%}[$env] "
   fi

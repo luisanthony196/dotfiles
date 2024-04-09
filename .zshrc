@@ -20,5 +20,5 @@ source $ZDOTDIR/shell/aliases.zsh
 # No permite el historial duplicado
 setopt HIST_IGNORE_ALL_DUPS
 # Path que cargara mis scripts
-path+=("$ZDOTDIR/bin")
+path+=("$ZDOTDIR/bin" "$HOME/.cargo/bin")
 export path
