@@ -1,0 +1,99 @@
+{
+  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+  "logo": {
+    "type": "kitty-direct",
+    "source": "~/.config/fastfetch/sanae.png",
+    "padding": {
+      "right": 0,
+      "top": 4
+    }
+  },
+  "general": {
+    "multithreading": true
+  },
+  "display": {
+    "separator": " ➜  "
+  },
+  "modules": [
+    "break",
+    {
+      "type": "title",
+      "format": "{6}{7}{8}"
+    },
+    {
+      "type": "custom",
+      "format": "────────────" // `\u001b` is `\033`, or `\e`
+    },
+    {
+      "key": " ",
+      "keyColor": "green",
+      "type": "os"
+    },
+    {
+      "key": "󰌢 ",
+      "keyColor": "cyan",
+      "type": "host"
+    },
+    {
+      "key": " ",
+      "keyColor": "blue",
+      "type": "kernel"
+    },
+    {
+      "key": "󰅐 ",
+      "keyColor": "green",
+      "type": "uptime"
+    },
+    {
+      "key": " ",
+      "keyColor": "cyan",
+      "type": "packages"
+    },
+    {
+      "key": " ",
+      "keyColor": "blue",
+      "type": "wm"
+    },
+    {
+      "key": " ",
+      "keyColor": "green",
+      "type": "shell"
+    },
+    {
+      "key": " ",
+      "keyColor": "cyan",
+      "type": "terminal"
+    },
+    {
+      "key": " ",
+      "keyColor": "blue",
+      "type": "terminalfont"
+    },
+    {
+      "key": "󰻠 ",
+      "keyColor": "green",
+      "type": "cpu"
+    },
+    {
+      "key": "󰍛 ",
+      "keyColor": "cyan",
+      "type": "gpu"
+    },
+    {
+      "key": "󰑭 ",
+      "keyColor": "blue",
+      "type": "memory"
+    },
+    {
+      "key": " ",
+      "keyColor": "green",
+      "type": "wifi"
+    },
+    {
+      "key": "󰩟 ",
+      "keyColor": "cyan",
+      "type": "localip",
+      "compact": true
+    },
+  ]
+}

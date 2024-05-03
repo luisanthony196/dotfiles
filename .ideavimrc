@@ -1,0 +1,21 @@
+let mapleader=" "
+" Options
+set clipboard+=unnamed
+set clipboard+=ideaput
+set ideajoin
+set idearefactormode=keep
+set incsearch
+set showmode
+set hlsearch
+set surround
+set visualbell
+set noerrorbells
+set highlightedyank
+set argtextobj
+set matchit
+set multiple-cursors
+" Keymap
+map U <C-R>
+" Plugins
+set quickscope
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']

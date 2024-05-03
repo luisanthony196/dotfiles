@@ -1,0 +1,37 @@
+#!/bin/bash
+
+rbw unlocked
+if [ $? -ne 0 ]; then
+  rbw unlock
+fi
+
+fzf_opt='--cycle --layout=reverse --border --height=40% --preview-window=wrap'
+
+entry=$(rbw list | fzf $fzf_opt)
+
+if [[ ! $entry ]]; then
+  echo 'No existe esta entrada';  exit 1
+fi
+
+rbw get $entry | wl-copy
+echo '[ '$entry' ] ===> Copiado al portapapeles'
+
+# bitwarden_path="$HOME/.bitwarden.json"
+#
+# if [[ $1 == '-u' ]]; then
+#   if [[ $2 ]]; then
+#     user=$(fx $bitwarden_path ".items.find(x => x.name == '$2').login.username")
+#     echo '[ '$user' ] ==> Copiado al portapapeles'
+#     wl-copy $user; exit 1
+#   fi
+#   echo '==> Usuario no encontrado'; exit 1
+# fi
+#
+# pass=$(fx $bitwarden_path ".items.find(x => x.name == '$1').login.password")
+#
+# if [[ ! $pass ]]; then
+#   echo '==> Contrasenia no encontrada!!!'; exit 1
+# fi
+#
+# echo '[ '$1' ] ==> Copiado al portapapeles'
+# wl-copy $pass

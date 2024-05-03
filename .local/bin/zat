@@ -1,0 +1,14 @@
+#!/bin/bash
+
+pdf_path='/mnt/Documents/PDF/'
+fzf_opt='--cycle --layout=reverse --border --height=40% --preview-window=wrap'
+result=$(fd --search-path $pdf_path --extension pdf -X printf '%s\n' {/} | fzf $fzf_opt)
+echo $result
+
+if [[ ! $result ]]; then
+  echo 'No se eligio un item';  exit 1
+fi
+
+echo $result
+
+nohup zathura "/mnt/Documents/PDF/$result" & disown

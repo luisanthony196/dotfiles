@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# Obtener una lista de carpetas
+folders=$(ls -d */)
+# Inicializar el contador
+count=1
+folders_to_move=()
+echo "Se moveran los siguientes archivos:"
+# Recorrer las carpetas y renombrarlas
+for folder in $folders; do
+  # Comprobar si la carpeta tiene la numeración inicial
+  if [[ $folder =~ ^[0-9]{3}_ ]]; then
+    number=$(echo $folder | sed -E "s|0*([0-9]+)\_.+\/|\1|")
+    # Comprobar si la carpeta cumple con el contador
+    if [[ $number -ne $count ]]; then
+      # Generar el nombre correcto
+      tidy_folder=$(printf "%03d" $count)_${folder:4}
+      # Guardar el nombre antiguo junto al nuevo
+      folders_to_move+=("$folder:$tidy_folder")
+      echo "- $folder -> $tidy_folder"
+    fi
+  fi
+  # Incrementar el contador
+  count=$((count+1))
+done
+
+echo -n "Proceder con los cambios [s|N]: "
+read ans
+if [[ $ans -eq "s" ]]; then
+  for item in "${folders_to_move[@]}"; do
+    old_name=$(echo $item | cut -d: -f1)
+    new_name=$(echo $item | cut -d: -f2)
+    mv $old_name $new_name
+  done
+fi
