@@ -104,8 +104,8 @@ function extract
   end
 end
 # Activa, desactiva o ve el estatus del servicio de docker
-function dock
-  switch $argv
+function dock -a option -d "Enable and disable docker"
+  switch $option
     case 'on'
       sudo systemctl start docker
     case 'off'
@@ -115,15 +115,26 @@ function dock
   end
 end
 # Crear una carpeta y entrar
-function mkcd
+function mkcd -a foldername
   mkdir -p $argv
   cd $argv
 end
 # Atajo para cheatsheet
-function cht 
+function cht -d "Asks cheatsheet to cht.sh"
   curl cht.sh/$argv | bat -pp
 end
 # Backup de archivo
-function backup --argument filename
+function backup -a filename -d "Backup file"
   cp $filename $filename.bak
+end
+# Compile c++
+function ccpp --a filename -d "Compile C++ file"
+  g++ $filename.cpp -o $filename && ./$filename
+end
+# Compile c++ project
+function mkcpp --a foldername -d "Compile C++ project"
+  if not test -d $foldername
+    mkdir -p $foldername
+  end
+  cmake -S . -B $foldername 1> /dev/null && cmake --build $foldername
 end

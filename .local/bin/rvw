@@ -13,7 +13,7 @@ if [[ ! $entry ]]; then
   echo 'No existe esta entrada';  exit 1
 fi
 
-rbw get $entry | wl-copy
+rbw get $entry | tr -d '\n' | xclip -i #wl-copy
 echo '[ '$entry' ] ===> Copiado al portapapeles'
 
 # bitwarden_path="$HOME/.bitwarden.json"
