@@ -55,11 +55,15 @@ set -gx EDITOR nvim
 
 ### FUNCTIONS ###
 function fish_user_key_bindings
+  bind --erase --preset \cr
   bind -M insert \ce end-of-line
   bind -M insert \cp history-search-backward
   bind -M insert \cn history-search-forward
+  bind -M insert \cr history-pager
   bind \cp history-search-backward
   bind \cn history-search-forward
+  bind \cr history-pager
+  bind --preset U redo
 end
 function dclin --argument filename
   docker compose -f compose.lin.yml up -d --build --force-recreate

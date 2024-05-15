@@ -1,19 +1,21 @@
 #!/bin/bash
 
-rbw unlocked
-if [ $? -ne 0 ]; then
-  rbw unlock
-fi
+# rbw unlocked
+# if [ $? -ne 0 ]; then
+#   rbw unlock
+# fi
 
 fzf_opt='--cycle --layout=reverse --border --height=40% --preview-window=wrap'
 
-entry=$(rbw list | fzf $fzf_opt)
+# entry=$(rbw list | fzf $fzf_opt)
+entry=$(cat $HOME/.bitwarden.json | jq -r '.items.[].name' | fzf $fzf_opt)
 
 if [[ ! $entry ]]; then
   echo 'No existe esta entrada';  exit 1
 fi
 
-rbw get $entry | tr -d '\n' | xclip -i #wl-copy
+# rbw get $entry | tr -d '\n' | xclip -i #wl-copy
+jq -r --arg jq_name "$entry" '.items.[] | select (.name==$jq_name).login.password' $HOME/.bitwarden.json | tr -d '\n' | xclip -i
 echo '[ '$entry' ] ===> Copiado al portapapeles'
 
 # bitwarden_path="$HOME/.bitwarden.json"
