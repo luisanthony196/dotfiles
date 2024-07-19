@@ -183,7 +183,7 @@ function dock -a option -d "Enable and disble docker"
   case 'on'
     sudo systemctl start docker
   case 'off'
-    sudo systemctl stop docker.socket $$ sudo systemctl stop docker
+    sudo systemctl stop docker.socket && sudo systemctl stop docker
   case '*'
     systemctl status docker
   end

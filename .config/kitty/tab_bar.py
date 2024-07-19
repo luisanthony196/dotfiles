@@ -17,8 +17,8 @@ def draw_tab(
     is_last: bool,
     extra_data: ExtraData,
 ) -> int:
-    tab_bg = screen.cursor.bg
-    tab_fg = screen.cursor.fg
+    active_bg = screen.cursor.bg
+    active_fg = screen.cursor.fg
     default_bg = as_rgb(int(draw_data.default_bg))
 
     if extra_data.next_tab:
@@ -31,36 +31,55 @@ def draw_tab(
         prev_tab_bg = default_bg
 
     if index == get_active_tab_index():
-        screen.cursor.fg=tab_bg
+        screen.cursor.fg=active_bg
         screen.cursor.bg=prev_tab_bg
         screen.draw('')
-        screen.cursor.fg=tab_fg
-        screen.cursor.bg=tab_bg
+        screen.cursor.fg=active_fg
+        screen.cursor.bg=active_bg
         screen.draw(' ')
         draw_title(draw_data, screen, tab, index, max_tab_length)
+        # ----------
+        extra = screen.cursor.x + 1 - before - max_tab_length
+        if extra > 0 and extra + 1 < screen.cursor.x:
+            screen.cursor.x -= extra
+            screen.draw('…')
+        # ----------
         screen.draw(' ')
-        screen.cursor.fg=tab_bg
+        screen.cursor.fg=active_bg
         screen.cursor.bg=next_tab_bg
         screen.draw('')
     elif index < get_active_tab_index():
         if index == 1:
+            screen.cursor.fg=active_bg
             screen.cursor.bg=default_bg
-            screen.cursor.fg=tab_bg
             screen.draw('')
-            screen.cursor.bg=tab_bg
-            screen.cursor.fg=tab_fg
+            screen.cursor.fg=active_fg
+            screen.cursor.bg=active_bg
         else:
             screen.cursor.fg=default_bg
             screen.draw('')
         screen.draw(' ')
         draw_title(draw_data, screen, tab, index, max_tab_length)
+        # ----------
+        extra = screen.cursor.x + 1 - before - max_tab_length
+        # print(screen.cursor.x,before,max_tab_length,"->",extra)
+        if extra > 0 and extra + 1 < screen.cursor.x:
+            screen.cursor.x -= extra
+            screen.draw('…')
+        # ----------
         screen.draw(' ')
     elif index > get_active_tab_index():
         screen.draw(' ')
         draw_title(draw_data, screen, tab, index, max_tab_length)
+        # ----------
+        extra = screen.cursor.x + 2 - before - max_tab_length
+        if extra > 0 and extra + 1 < screen.cursor.x:
+            screen.cursor.x -= extra
+            screen.draw('…')
+        # ----------
         screen.draw(' ')
         if is_last:
-            screen.cursor.fg=tab_bg
+            screen.cursor.fg=active_bg
             screen.cursor.bg=default_bg
             screen.draw('')
         else:
