@@ -1,8 +1,0 @@
-#!/bin/bash
-
-fzf_opt='--cycle --layout=reverse --border --height=40% --preview-window=wrap'
-result=$(dotnet-search $1 | awk '!/^[ \t-]+/ && NR>2 {print $1}' | head -n -2 | fzf $fzf_opt)
-echo $result
-if [[ $result ]]; then
-  dotnet add package $result
-fi

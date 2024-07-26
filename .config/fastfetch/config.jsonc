@@ -3,9 +3,10 @@
   "logo": {
     "type": "kitty-direct",
     "source": "~/.config/fastfetch/sanae.png",
+    "width": 35,
     "padding": {
       "right": 0,
-      "top": 4
+      "top": 2
     }
   },
   "general": {
