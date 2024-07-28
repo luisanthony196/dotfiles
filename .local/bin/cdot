@@ -1,0 +1,93 @@
+#!/bin/python
+
+import os
+import argparse
+
+""" Analisis sintactico """
+
+parser = argparse.ArgumentParser()
+parser.add_argument('CLASS_NAME', help='Nombre de la clase')
+parser.add_argument('-i', '--interface', action='store_true')
+parser.add_argument('LOCATION', nargs='?', help='Ubicacion de la carpeta')
+# Mutuamente excluyentes
+group = parser.add_mutually_exclusive_group()
+group.add_argument('-m', '--model', action='store_true')
+group.add_argument('-s', '--service', action='store_true')
+group.add_argument('-c', '--controller', action='store_true')
+# Guardar los resultados
+args = parser.parse_args()
+
+""" Verificacion de proyecto Dotnet"""
+
+csproj = [f for f in os.listdir() if f.endswith(".csproj")]
+
+if not csproj:
+    print("No existe el archivo csproj")
+    exit()
+
+csproj = csproj[0][:-7]
+
+itfc = 'I' if args.interface else ''
+type_of = 'interface' if args.interface else 'class'
+
+""" Funciones complementarias """
+
+def verify_directory(route):
+    directory = os.path.join(route)
+    if not os.path.exists(directory):
+        os.makedirs(directory)
+    return directory
+
+def procces_namespace(route):
+    result = route.strip("./").split("/")
+    if len(result[0]) == 0:
+        return f'namespace {csproj};'
+    return f'namespace {csproj}.{".".join(result)};'
+
+def create_file(name, content):
+    if os.path.exists(name):
+        print("El archivo ya existe")
+        exit()
+
+    with open(name, "w") as file:
+        file.write(content)
+    print(f"Se ha creado el archivo {name}")
+
+""" Respuesta a los argumentos """
+
+def create_class():
+    dir = args.LOCATION or "."
+    directory = verify_directory(dir)
+    namespace = procces_namespace(dir)
+    content = f"{namespace}\n\npublic {type_of} {itfc}{args.CLASS_NAME}\n{{\n}}"
+    create_file(os.path.join(directory, f"{itfc}{args.CLASS_NAME}.cs"), content)
+
+def create_model():
+    dir = args.LOCATION or "Models"
+    directory = verify_directory(dir)
+    namespace = procces_namespace(dir)
+    content = f"{namespace}\n\npublic {type_of} {itfc}{args.CLASS_NAME}\n{{\n}}"
+    create_file(os.path.join(directory, f"{itfc}{args.CLASS_NAME}.cs"), content)
+
+def create_service():
+    dir = args.LOCATION or "Services"
+    directory = verify_directory(dir)
+    namespace = procces_namespace(dir)
+    content = f"{namespace}\n\npublic {type_of} {itfc}{args.CLASS_NAME}Service\n{{\n}}"
+    create_file(os.path.join(directory, f"{itfc}{args.CLASS_NAME}Service.cs"), content)
+
+def create_controllder():
+    dir = args.LOCATION or "Controllers"
+    directory = verify_directory(dir)
+    namespace = procces_namespace(dir)
+    content = f'using Microsoft.AspNetCore.Mvc;\n\n{namespace}\n\n[Route("api/[controller]")]\n[ApiController]\npublic class {args.CLASS_NAME}Controller : ControllerBase\n{{\n}}'
+    create_file(os.path.join(directory, f"{args.CLASS_NAME}Controller.cs"), content)
+
+if args.model:
+    create_model()
+elif args.controller:
+    create_controllder()
+elif args.service:
+    create_service()
+else:
+    create_class()
