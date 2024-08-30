@@ -11,4 +11,4 @@ fi
 
 echo $result
 
-nohup zathura "/mnt/Documents/PDF/$result" & disown
+nohup zathura "/mnt/Documents/PDF/$result" >"/home/luis/.local/share/zathura/logs/$result.log" 2>&1 & disown

@@ -32,4 +32,6 @@ if [[ $ans -eq "s" ]]; then
     new_name=$(echo $item | cut -d: -f2)
     mv $old_name $new_name
   done
+else
+  echo "No se realizo ningun cambio"
 fi

@@ -1,0 +1,32 @@
+#!/bin/bash
+
+# Name: ctec
+# Description: Open and compile .tex file
+# Author: Luis Chavarria
+# Version: 1.0
+#
+# Usage: ctec [INPUT]
+# Example: ctec src/index.tex
+# Dependences: zathura, tectonic, entr
+# Notes: This script uses the stack mentioned above
+
+if ! test -e $1; then
+  echo "El archivo no existe"
+  exit 1
+fi
+
+name="${1%.*}"
+name_pdf="${name}.pdf"
+
+# tectonic -X compile $1
+typst compile $1
+
+if ! test -e $name_pdf; then
+  echo "No se pudo continuar"
+  exit 1
+fi
+
+zathura $name_pdf &
+
+# fd --full-path $1 | entr tectonic -X compile $1
+fd --full-path $1 | entr typst compile $1

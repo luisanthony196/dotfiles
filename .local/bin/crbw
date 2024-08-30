@@ -14,7 +14,10 @@ if [[ ! $entry ]]; then
   echo 'No existe esta entrada';  exit 1
 fi
 
-rbw get $entry | tr -d '\n' | xsel #wl-copy
+pass=$(rbw get $entry)
+echo $pass | tr -d '\n' | xsel -ib
+echo $pass | tr -d '\n' | xsel -ip
+# echo $pass | tr -d '\n' | xsel -ip
 # jq -r --arg jq_name "$entry" '.items.[] | select (.name==$jq_name).login.password' $HOME/.bitwarden.json | tr -d '\n' | xsel
 echo '[ '$entry' ] ===> Copiado al portapapeles'
 
