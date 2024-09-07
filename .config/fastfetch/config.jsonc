@@ -3,7 +3,7 @@
   "logo": {
     "type": "kitty-direct",
     "source": "~/.config/fastfetch/sanae.png",
-    "width": 35,
+    "width": 34,
     "padding": {
       "right": 0,
       "top": 2
@@ -89,12 +89,6 @@
       "key": " ",
       "keyColor": "green",
       "type": "wifi"
-    },
-    {
-      "key": "󰩟 ",
-      "keyColor": "cyan",
-      "type": "localip",
-      "compact": true
     },
   ]
 }

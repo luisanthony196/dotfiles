@@ -1,0 +1,31 @@
+#!/bin/bash
+
+if [ -n "$2" ]; then
+  build=$2
+else
+  build=$1
+fi
+
+if [ -f "$build" ]; then
+  name=${build:0:-4} # Expaxion de parametro, {var:ini:size}
+  g++ $name.cpp -o $name && ./$name
+elif [ -d "$build" ]; then
+  cmake -S . -B $build 1> /dev/null
+  if [ "$1" = "-x" ]; then
+    run_file=$(cmake --build $build | awk '{print $NF}')
+    echo -e "\033[1;32mCompilando el archivo '$run_file'\n\033[0m"
+    "./$build/$run_file"
+  else
+    cmake --build $build
+  fi
+else
+  mkdir $build
+  cmake -S . -B $build 1> /dev/null
+  if [ "$1" = "-x" ]; then
+    run_file=$(cmake --build $build | awk '{print $NF}')
+    echo -e "\033[1;32mCompilando el archivo '$run_file'\n\033[0m"
+    "./$build/$run_file"
+  else
+    cmake --build $build
+  fi
+fi

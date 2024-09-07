@@ -2,35 +2,33 @@
 
 import os
 import argparse
-
-""" Analisis sintactico """
-
-parser = argparse.ArgumentParser()
-parser.add_argument('CLASS_NAME', help='Nombre de la clase')
-parser.add_argument('-i', '--interface', action='store_true')
-parser.add_argument('LOCATION', nargs='?', help='Ubicacion de la carpeta')
-# Mutuamente excluyentes
-group = parser.add_mutually_exclusive_group()
-group.add_argument('-m', '--model', action='store_true')
-group.add_argument('-s', '--service', action='store_true')
-group.add_argument('-c', '--controller', action='store_true')
-# Guardar los resultados
-args = parser.parse_args()
+import glob
+import xml.etree.ElementTree as ET
 
 """ Verificacion de proyecto Dotnet"""
 
 csproj = [f for f in os.listdir() if f.endswith(".csproj")]
 
 if not csproj:
-    print("No existe el archivo csproj")
+    print("No existe el archivo .csproj")
     exit()
+
+
+tree = ET.parse(csproj[0])
+root = tree.getroot()
 
 csproj = csproj[0][:-7]
 
-itfc = 'I' if args.interface else ''
-type_of = 'interface' if args.interface else 'class'
-
 """ Funciones complementarias """
+
+
+def confirm(list):
+	print("Elige una opcion:")
+	for i in range(0, len(list)):
+		print(f"{i + 1}. {list[i]}")
+	r = int(input("Respuesta: "))
+	return r if r > 0 else None
+
 
 def verify_directory(route):
     directory = os.path.join(route)
@@ -38,11 +36,13 @@ def verify_directory(route):
         os.makedirs(directory)
     return directory
 
+
 def procces_namespace(route):
     result = route.strip("./").split("/")
     if len(result[0]) == 0:
         return f'namespace {csproj};'
     return f'namespace {csproj}.{".".join(result)};'
+
 
 def create_file(name, content):
     if os.path.exists(name):
@@ -53,41 +53,109 @@ def create_file(name, content):
         file.write(content)
     print(f"Se ha creado el archivo {name}")
 
+
 """ Respuesta a los argumentos """
 
-def create_class():
+
+def create_class(type_of, itfc):
     dir = args.LOCATION or "."
     directory = verify_directory(dir)
     namespace = procces_namespace(dir)
-    content = f"{namespace}\n\npublic {type_of} {itfc}{args.CLASS_NAME}\n{{\n}}"
-    create_file(os.path.join(directory, f"{itfc}{args.CLASS_NAME}.cs"), content)
+    content = f"{namespace}\n\npublic {type_of} {itfc}{args.FILE_NAME}\n{{\n}}"
+    create_file(os.path.join(directory, f"{itfc}{args.FILE_NAME}.cs"), content)
 
-def create_model():
+
+def create_model(type_of, itfc):
     dir = args.LOCATION or "Models"
     directory = verify_directory(dir)
     namespace = procces_namespace(dir)
-    content = f"{namespace}\n\npublic {type_of} {itfc}{args.CLASS_NAME}\n{{\n}}"
-    create_file(os.path.join(directory, f"{itfc}{args.CLASS_NAME}.cs"), content)
+    content = f"{namespace}\n\npublic {type_of} {itfc}{args.FILE_NAME}\n{{\n}}"
+    create_file(os.path.join(directory, f"{itfc}{args.FILE_NAME}.cs"), content)
 
-def create_service():
+
+def create_service(type_of, itfc):
     dir = args.LOCATION or "Services"
     directory = verify_directory(dir)
     namespace = procces_namespace(dir)
-    content = f"{namespace}\n\npublic {type_of} {itfc}{args.CLASS_NAME}Service\n{{\n}}"
-    create_file(os.path.join(directory, f"{itfc}{args.CLASS_NAME}Service.cs"), content)
+    content = f"{namespace}\n\npublic {type_of} {itfc}{args.FILE_NAME}Service\n{{\n}}"
+    create_file(os.path.join(directory, f"{itfc}{args.FILE_NAME}Service.cs"), content)
+
 
 def create_controllder():
     dir = args.LOCATION or "Controllers"
     directory = verify_directory(dir)
     namespace = procces_namespace(dir)
-    content = f'using Microsoft.AspNetCore.Mvc;\n\n{namespace}\n\n[Route("api/[controller]")]\n[ApiController]\npublic class {args.CLASS_NAME}Controller : ControllerBase\n{{\n}}'
-    create_file(os.path.join(directory, f"{args.CLASS_NAME}Controller.cs"), content)
+    content = f'using Microsoft.AspNetCore.Mvc;\n\n \
+    	{namespace}\n\n[Route("api/[controller]")]\n \
+     	[ApiController]\n \
+      	public class {args.FILE_NAME}Controller : ControllerBase\n{{\n}}'
+    create_file(os.path.join(directory, f"{args.FILE_NAME}Controller.cs"), content)
 
-if args.model:
-    create_model()
-elif args.controller:
-    create_controllder()
-elif args.service:
-    create_service()
-else:
-    create_class()
+
+def create_test(type_of, itfc):
+    dir = args.LOCATION or "."
+    directory = verify_directory(dir)
+    namespace = procces_namespace(dir)
+    content = f"{namespace}\n\public {type_of} {itfc}{args.FILE_NAME}\n{{\n}}"
+    create_file(os.path.join(directory, f"{itfc}{args.FILE_NAME}Test.cs"), content)
+
+
+def new_file(args):
+	print(args)
+	itfc = 'I' if args.interface else ''
+	type_of = 'interface' if args.interface else 'class'
+
+	if args.model:
+	    create_model(itfc, type_of)
+	elif args.controller:
+	    create_controllder()
+	elif args.service:
+	    create_service(type_of, itfc)
+	elif args.test:
+	    create_test(type_of, itfc)
+	else:
+	    print("Por favor usar el `--help` para usar la herramienta")
+
+
+def conf_ref(args):
+	if args.add:
+		proj_list = glob.glob('../*/*.csproj')
+		dir = os.getcwd().split('/')[-1]
+		proj_list.remove(f"../{dir}/{csproj}.csproj")
+		r = confirm(proj_list)
+		os.system(f"dotnet add reference {proj_list[r]}")
+	elif args.remove:
+		search = root.findall('./ItemGroup/ProjectReference')
+		dep_list = [item.attrib['Include'] for item in list(search)]
+		r = confirm(dep_list)
+		os.system(f"dotnet remove reference {dep_list[r].replace('\\', '/')}")
+	else:
+		os.system("dotnet list reference")
+
+
+""" Analisis sintactico """
+
+
+parser = argparse.ArgumentParser()
+subparsers = parser.add_subparsers()
+par_new = subparsers.add_parser('new', help="Create new file")
+par_new.add_argument('FILE_NAME', help='Nombre de la clase')
+par_new.add_argument('-i', '--interface', action='store_true')
+par_new.add_argument('LOCATION', nargs='?', help='Ubicacion de la carpeta')
+# Mutuamente excluyentes
+grp_new = par_new.add_mutually_exclusive_group()
+grp_new.add_argument('-m', '--model', action='store_true')
+grp_new.add_argument('-s', '--service', action='store_true')
+grp_new.add_argument('-c', '--controller', action='store_true')
+grp_new.add_argument('-t', '--test', action='store_true')
+par_new.set_defaults(func=new_file)
+
+par_ref = subparsers.add_parser('ref', help="ref help")
+par_ref.add_argument('LOCATION', nargs='?', help='Ubicacion de la carpeta')
+par_ref.add_argument('-a', '--add', action='store_true')
+par_ref.add_argument('-l', '--list', action='store_true')
+par_ref.add_argument('-r', '--remove', action='store_true')
+par_ref.set_defaults(func=conf_ref)
+# Guardar y ejecuta la funcion correspondiente
+args = parser.parse_args()
+args.func(args)

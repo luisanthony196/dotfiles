@@ -1,42 +1,43 @@
 #!/bin/bash
 
+# Name: crbw
+# Description: Search pass with rbw in fzf
+# Author: Luis Chavarria
+# Version: 1.0
+#
+# Usage: crbw [INPUT]
+# Example: crbw
+# Dependences: rbw, fzf, [wl-copy, xsel]
+# Notes: This script is adaptable to wayland and x11
+#   if do you want to work with csv see previous commits
+
 # rbw unlocked
 # if [ $? -ne 0 ]; then
 #   rbw unlock
 # fi
 
+function clipboard() {
+	if [ -n "$WAYLAND_DISPLAY" ]; then
+		echo $1 | tr -d '\n' | wl-copy
+		echo $1 | tr -d '\n' | wl-copy -p
+	else
+		echo $1 | tr -d '\n' | xsel -ib
+		echo $1 | tr -d '\n' | xsel -ip
+	fi
+}
+
 fzf_opt='--cycle --layout=reverse --border --height=40% --preview-window=wrap'
 
-entry=$(rbw list | fzf $fzf_opt)
-# entry=$(cat $HOME/.bitwarden.json | jq -r '.items.[].name' | fzf $fzf_opt)
+if [[ $1 ]]; then
+  entry=$(rbw list | fzf $fzf_opt -q $1)
+else
+  entry=$(rbw list | fzf $fzf_opt)
+fi
 
 if [[ ! $entry ]]; then
   echo 'No existe esta entrada';  exit 1
 fi
 
 pass=$(rbw get $entry)
-echo $pass | tr -d '\n' | xsel -ib
-echo $pass | tr -d '\n' | xsel -ip
-# echo $pass | tr -d '\n' | xsel -ip
-# jq -r --arg jq_name "$entry" '.items.[] | select (.name==$jq_name).login.password' $HOME/.bitwarden.json | tr -d '\n' | xsel
+clipboard "$pass"
 echo '[ '$entry' ] ===> Copiado al portapapeles'
-
-# bitwarden_path="$HOME/.bitwarden.json"
-#
-# if [[ $1 == '-u' ]]; then
-#   if [[ $2 ]]; then
-#     user=$(fx $bitwarden_path ".items.find(x => x.name == '$2').login.username")
-#     echo '[ '$user' ] ==> Copiado al portapapeles'
-#     wl-copy $user; exit 1
-#   fi
-#   echo '==> Usuario no encontrado'; exit 1
-# fi
-#
-# pass=$(fx $bitwarden_path ".items.find(x => x.name == '$1').login.password")
-#
-# if [[ ! $pass ]]; then
-#   echo '==> Contrasenia no encontrada!!!'; exit 1
-# fi
-#
-# echo '[ '$1' ] ==> Copiado al portapapeles'
-# wl-copy $pass

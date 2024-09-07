@@ -1,7 +1,7 @@
 ## Set values
 # Hide welcome message & ensure we are reporting fish as shell
 set fish_greeting
-set VIRTUAL_ENV_DISABLE_PROMPT "1"
+# set VIRTUAL_ENV_DISABLE_PROMPT "1"
 set -gx EDITOR nvim
 set -xU MANPAGER "sh -c 'col -bx | bat -l man -p'"
 set -xU MANROFFOPT "-c"
@@ -32,7 +32,7 @@ if test -d ~/.dotnet/tools
 end
 
 ## Advanced command-not-found hook
-source /usr/share/doc/find-the-command/ftc.fish
+# source /usr/share/doc/find-the-command/ftc.fish
 
 ## Atajos de teclado
 if [ "$fish_key_bindings" = fish_vi_key_bindings ];
@@ -112,6 +112,7 @@ alias untar 'tar -zxvf '
 alias upd '/usr/bin/garuda-update'
 alias vdir 'vdir --color=auto'
 alias wget 'wget -c '
+alias activate 'source .venv/bin/activate.fish'
 
 # Get fastest mirrors
 alias mirror 'sudo reflector -f 30 -l 30 --number 10 --verbose --save /etc/pacman.d/mirrorlist'
@@ -135,6 +136,9 @@ alias cdts="cd /mnt/Documents/Typescript"
 alias cdsc="cd /mnt/Documents/Scripts"
 alias cdcs="cd /mnt/Documents/Csharp"
 alias cddo="cd /mnt/Downloads"
+alias cdtd="cd /mnt/Templates/docker"
+alias cdte="cd /mnt/Templates/exercism"
+alias cdtw="cd /mnt/Templates/winshare"
 
 # Alias para docker compose
 alias dcf="docker compose up -d --build --force-recreate"
@@ -158,19 +162,6 @@ alias gloga='git log --oneline --decorate --graph --all'
 # Traduccion
 alias tranes="trans en:es"
 alias tranen="trans es:en"
-
-# Compile c++
-function ccpp --a filename -d "Compile C++ file"
-  g++ $filename.cpp -o $filename && ./$filename
-end
-
-# Compile c++ project
-function mkcpp --a foldername -d "Compile C++ project"
-  if not test -d $foldername
-    mkdir -p $foldername
-  end
-  cmake -S . -B $foldername 1> /dev/null && cmake --build $foldername
-end
 
 # Cheatsheet
 function cht -d "Asks cheatsheet to cht.sh"
