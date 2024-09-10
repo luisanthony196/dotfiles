@@ -7,11 +7,14 @@ else
 fi
 
 if [ -f "$build" ]; then
+  # Ejecutar un solo archivo (script)
   name=${build:0:-4} # Expaxion de parametro, {var:ini:size}
   g++ $name.cpp -o $name && ./$name
 elif [ -d "$build" ]; then
+  # Compilar el projecto Cmake
   cmake -S . -B $build 1> /dev/null
   if [ "$1" = "-x" ]; then
+    # En caso de necesitar ejecutar el proyecto
     run_file=$(cmake --build $build | awk '{print $NF}')
     echo -e "\033[1;32mCompilando el archivo '$run_file'\n\033[0m"
     "./$build/$run_file"

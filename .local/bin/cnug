@@ -4,7 +4,7 @@ fzf_opt='--cycle --layout=reverse --border --height=40% --preview-window=wrap'
 # result=$(dotnet tool search $1 | awk '!/^[ \t-]+/ && NR>2 {print $1}' | head -n -2 | fzf $fzf_opt)
 search_list=$(nuget search $1)
 
-data=$(echo "$search_list" | grep "^> " | sed 's/> //g' | sed 's/Downloads: //g' | tr -d ' ')
+data=$(echo -e "$search_list" | grep '^> ' | awk '{print $2$3$4$3$7}')
 result=$(echo -e "$data" | column --table --separator '|' | fzf $fzf_opt | awk '{print $1}')
 echo $result
 if [[ $result ]]; then
