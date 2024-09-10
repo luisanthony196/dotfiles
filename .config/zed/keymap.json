@@ -1,0 +1,36 @@
+[
+	{
+		"bindings": {
+			"f1": "command_palette::Toggle",
+			"f3": "projects::OpenRecent",
+			"f4": "workspace::Open",
+			"ctrl-o": "workspace::ToggleRightDock",
+			"ctrl-`": "zed::OpenKeymap"
+		}
+	},
+	{
+		"context": "Editor",
+		"bindings": {
+			"ctrl-c": "editor::Copy", // vim default: return to normal mode
+			"ctrl-x": "editor::Cut", // vim default: decrement
+			"ctrl-v": "editor::Paste", // vim default: visual block mode
+			"ctrl-y": "editor::Undo", // vim default: line up
+			"ctrl-f": "buffer_search::Deploy", // vim default: page down
+			"ctrl-a": "editor::SelectAll", // vim default: increment
+			"ctrl-r": ["buffer_search::Deploy", { "replace_enabled": true }], // vim default: redo
+			"ctrl-alt-;": "pane::CloseActiveItem",
+			"ctrl-b": "pane::CloseActiveItem",
+			"ctrl-j": "editor::GoToDiagnostic",
+			"ctrl-k": "editor::GoToPrevDiagnostic",
+			"ctrl-w": "editor::SelectLargerSyntaxNode",
+			"ctrl-shift-w": "editor::SelectSmallerSyntaxNode"
+		}
+	},
+	{
+		"context": "vim_mode == normal",
+		"bindings": {
+			"U": "editor::Redo"
+		},
+		"backspace": "pane::GoBack"
+	}
+]
