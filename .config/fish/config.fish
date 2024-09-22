@@ -2,7 +2,7 @@
 # Hide welcome message & ensure we are reporting fish as shell
 set fish_greeting
 # set VIRTUAL_ENV_DISABLE_PROMPT "1"
-set -gx EDITOR nvim
+set -gx EDITOR lvim
 set -xU MANPAGER "sh -c 'col -bx | bat -l man -p'"
 set -xU MANROFFOPT "-c"
 set -x SHELL /usr/bin/fish
@@ -136,9 +136,9 @@ alias cdts="cd /mnt/Documents/Typescript"
 alias cdsc="cd /mnt/Documents/Scripts"
 alias cdcs="cd /mnt/Documents/Csharp"
 alias cddo="cd /mnt/Downloads"
-alias cdtd="cd /mnt/Templates/docker"
-alias cdte="cd /mnt/Templates/exercism"
-alias cdtw="cd /mnt/Templates/winshare"
+alias cddk="cd /mnt/Templates/docker"
+alias cdex="cd /mnt/Templates/exercism"
+alias cddb="cd /mnt/Templates/databases"
 
 # Alias para docker compose
 alias dcf="docker compose up -d --build --force-recreate"
