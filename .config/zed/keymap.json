@@ -5,7 +5,8 @@
 			"f3": "projects::OpenRecent",
 			"f4": "workspace::Open",
 			"ctrl-o": "workspace::ToggleRightDock",
-			"ctrl-`": "zed::OpenKeymap"
+			"ctrl-`": "zed::OpenKeymap",
+			"ctrl-alt-;": "pane::CloseActiveItem"
 		}
 	},
 	{
@@ -18,7 +19,6 @@
 			"ctrl-f": "buffer_search::Deploy", // vim default: page down
 			"ctrl-a": "editor::SelectAll", // vim default: increment
 			"ctrl-r": ["buffer_search::Deploy", { "replace_enabled": true }], // vim default: redo
-			"ctrl-alt-;": "pane::CloseActiveItem",
 			"ctrl-b": "pane::CloseActiveItem",
 			"ctrl-j": "editor::GoToDiagnostic",
 			"ctrl-k": "editor::GoToPrevDiagnostic",
@@ -29,8 +29,9 @@
 	{
 		"context": "vim_mode == normal",
 		"bindings": {
-			"U": "editor::Redo"
-		},
-		"backspace": "pane::GoBack"
+			"U": "editor::Redo",
+			"backspace": "pane::GoBack",
+			"enter": "pane::GoForward"
+		}
 	}
 ]
