@@ -3,6 +3,7 @@
 import os
 import argparse
 import glob
+import re
 import xml.etree.ElementTree as ET
 
 
@@ -94,6 +95,21 @@ def create_class(indI, incl):
     content = f"{namespace}\n\npublic {incl} {indI}{args.FILE}\n{{\n}}"
     create_file(os.path.join(directory, f"{indI}{args.FILE}.cs"), content)
 
+def create_dto():
+    # Todo: esta funcion si o si crea el base al no enviar una ruta
+    dir = args.PATH or f"Dtos/{args.FILE}"
+    directory = verify_directory(dir)
+    namespace = procces_namespace(dir)
+    if (args.PATH):
+        dto_name = re.match(r'Dtos\/(\w+)', args.PATH).group(1)
+        with open(f'Dtos/{dto_name}/{dto_name}Dto.cs') as file:
+            content = file.read()
+        section = content[content.index('{') + 1:content.rindex('}')]
+        content = f"{namespace}\n\npublic class {args.FILE}Dto\n{{{section}}}"
+    else:
+        content = f"{namespace}\n\npublic class {args.FILE}Dto\n{{\n}}"
+    create_file(os.path.join(directory, f"{args.FILE}Dto.cs"), content)
+
 
 def new_file():
     indI = 'I' if args.interface else ''
@@ -107,6 +123,8 @@ def new_file():
         create_service(indI, incl)
     elif args.test:
         create_test(indI, incl)
+    elif args.dto:
+        create_dto()
     else:
         create_class(indI, incl)
 
@@ -148,6 +166,7 @@ def cli():
     grp_new.add_argument('-s', '--service', action='store_true')
     grp_new.add_argument('-c', '--controller', action='store_true')
     grp_new.add_argument('-t', '--test', action='store_true')
+    grp_new.add_argument('-d', '--dto', action='store_true')
     par_new.set_defaults(func=new_file)
     # Argumento para manejar referencias
     par_ref = subparsers.add_parser('ref', help="ref help")

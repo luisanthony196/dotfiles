@@ -1,94 +1,118 @@
+//   _____ _____ _____ _____ _____ _____ _____ _____ _____ 
+//  |   __|  _  |   __|_   _|   __|   __|_   _|     |  |  |
+//  |   __|     |__   | | | |   __|   __| | | |   --|     |
+//  |__|  |__|__|_____| |_| |__|  |_____| |_| |_____|__|__|  GROUPS
+//
+//  by Bina
+
+  
 {
-  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
-  "logo": {
-    "type": "kitty-direct",
-    "source": "~/.config/fastfetch/sanae.png",
-    "width": 34,
-    "padding": {
-      "right": 0,
-      "top": 2
-    }
-  },
-  "general": {
-    "multithreading": true
-  },
-  "display": {
-    "separator": " ➜  "
-  },
-  "modules": [
-    "break",
-    {
-      "type": "title",
-      "format": "{6}{7}{8}"
+    "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+    "logo": {
+    	"source": "~/.config/fastfetch/sanae.png",
+    	"type": "kitty",
+        "width": 34,
+      	"padding": {
+          "right": 0,
+          "top": 2
+      	}
     },
-    {
-      "type": "custom",
-      "format": "────────────" // `\u001b` is `\033`, or `\e`
+    "display": {
+          "separator": " ➜  "
     },
-    {
-      "key": " ",
-      "keyColor": "green",
-      "type": "os"
-    },
-    {
-      "key": "󰌢 ",
-      "keyColor": "cyan",
-      "type": "host"
-    },
-    {
-      "key": " ",
-      "keyColor": "blue",
-      "type": "kernel"
-    },
-    {
-      "key": "󰅐 ",
-      "keyColor": "green",
-      "type": "uptime"
-    },
-    {
-      "key": " ",
-      "keyColor": "cyan",
-      "type": "packages"
-    },
-    {
-      "key": " ",
-      "keyColor": "blue",
-      "type": "wm"
-    },
-    {
-      "key": " ",
-      "keyColor": "green",
-      "type": "shell"
-    },
-    {
-      "key": " ",
-      "keyColor": "cyan",
-      "type": "terminal"
-    },
-    {
-      "key": " ",
-      "keyColor": "blue",
-      "type": "terminalfont"
-    },
-    {
-      "key": "󰻠 ",
-      "keyColor": "green",
-      "type": "cpu"
-    },
-    {
-      "key": "󰍛 ",
-      "keyColor": "cyan",
-      "type": "gpu"
-    },
-    {
-      "key": "󰑭 ",
-      "keyColor": "blue",
-      "type": "memory"
-    },
-    {
-      "key": " ",
-      "keyColor": "green",
-      "type": "wifi"
-    },
-  ]
+    "modules": [
+         {
+            "type": "os",
+            "key": "OS   ",
+            "keyColor": "31",  // = color1
+        },
+        {
+            "type": "kernel",
+            "key": " ├  ",
+            "keyColor": "31",
+        },
+        {
+            "type": "packages",
+            "format": "{} (pacman)",
+            "key": " ├ 󰏖 ",
+            "keyColor": "31",  
+        },
+        {
+            "type": "shell",
+            "key": " └  ",
+            "keyColor": "31", 
+        },
+        "break",
+        {
+            "type": "wm",
+            "key": "WM   ",
+            "keyColor": "32", 
+        },
+        {
+            "type": "wmtheme",
+            "key": " ├ 󰉼 ",
+            "keyColor": "32",
+        },
+        {
+            "type": "icons",
+            "key": " ├ 󰀻 ",
+            "keyColor": "32",
+        },
+        {
+            "type": "cursor",
+            "key": " ├  ",
+            "keyColor": "32", 
+        },
+        {
+            "type": "terminal",
+            "key": " ├  ",
+            "keyColor": "32",
+        },
+        {
+            "type": "terminalfont",
+            "key": " └  ",
+            "keyColor": "32", 
+        },
+        "break",
+        {
+            "type": "host",
+            "format": "{5} {1} Type {2}",
+            "key": "PC   ",
+            "keyColor": "33",
+        },
+        {
+            "type": "cpu",
+            "format": "{1} ({3}) @ {7} GHz",
+            "key": " ├  ",
+            "keyColor": "33",
+        },
+        {
+            "type": "gpu",
+            "format": "{1} {2} @ {12} GHz",            
+            "key": " ├ 󰢮 ",
+            "keyColor": "33",
+        },
+        {
+            "type": "memory",
+            "key": " ├  ",
+            "keyColor": "33",
+        },
+        {
+            "type": "wifi",
+            "key": " ├  ",
+            "keyColor": "33",
+        },
+        {
+            "type": "disk",
+            "key": " ├ 󰋊 ",
+            "keyColor": "33",
+        },
+        {
+            "type": "monitor",
+            "key": " └  ",
+            "keyColor": "33",
+        },
+        "break",
+        "break",
+    ]
 }

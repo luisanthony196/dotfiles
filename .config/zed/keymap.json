@@ -6,7 +6,11 @@
 			"f4": "workspace::Open",
 			"ctrl-o": "workspace::ToggleRightDock",
 			"ctrl-`": "zed::OpenKeymap",
-			"ctrl-alt-;": "pane::CloseActiveItem"
+			"ctrl-alt-;": "pane::CloseActiveItem",
+			"ctrl-h": "search::SelectPreviousMatch",
+			"ctrl-l": "search::SelectNextMatch",
+			"ctrl-w": null, // split pane
+			"ctrl-shift-w": null // close pane
 		}
 	},
 	{
@@ -21,9 +25,9 @@
 			"ctrl-r": ["buffer_search::Deploy", { "replace_enabled": true }], // vim default: redo
 			"ctrl-b": "pane::CloseActiveItem",
 			"ctrl-j": "editor::GoToDiagnostic",
-			"ctrl-k": "editor::GoToPrevDiagnostic",
-			"ctrl-w": "editor::SelectLargerSyntaxNode",
-			"ctrl-shift-w": "editor::SelectSmallerSyntaxNode"
+			"ctrl-k": "editor::GoToPreviousDiagnostic",
+			"ctrl-h": "vim::MoveToPrevious",
+			"ctrl-l": "vim::MoveToNext"
 		}
 	},
 	{
@@ -31,7 +35,16 @@
 		"bindings": {
 			"U": "editor::Redo",
 			"backspace": "pane::GoBack",
-			"enter": "pane::GoForward"
+			"enter": "pane::GoForward",
+			"space": "editor::ToggleFold",
+			"ctrl-w": "editor::SelectLargerSyntaxNode"
+		}
+	},
+	{
+		"context": "vim_mode == visual",
+		"bindings": {
+			"ctrl-w": "editor::SelectLargerSyntaxNode",
+			"ctrl-shift-w": "editor::SelectSmallerSyntaxNode"
 		}
 	}
 ]
