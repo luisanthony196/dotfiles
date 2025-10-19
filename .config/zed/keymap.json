@@ -4,7 +4,8 @@
 			"f1": "command_palette::Toggle",
 			"f3": "projects::OpenRecent",
 			"f4": "workspace::Open",
-			"ctrl-o": "workspace::ToggleRightDock",
+			// "ctrl-o": "workspace::ToggleRightDock",
+			"ctrl-o": "vim::ToggleProjectPanelFocus",
 			"ctrl-`": "zed::OpenKeymap",
 			"ctrl-alt-;": "pane::CloseActiveItem",
 			"ctrl-h": "search::SelectPreviousMatch",
@@ -23,7 +24,7 @@
 			"ctrl-f": "buffer_search::Deploy", // vim default: page down
 			"ctrl-a": "editor::SelectAll", // vim default: increment
 			"ctrl-r": ["buffer_search::Deploy", { "replace_enabled": true }], // vim default: redo
-			"ctrl-b": "pane::CloseActiveItem",
+			// "ctrl-b": "pane::CloseActiveItem",
 			"ctrl-j": "editor::GoToDiagnostic",
 			"ctrl-k": "editor::GoToPreviousDiagnostic",
 			"ctrl-h": "vim::MoveToPrevious",
@@ -45,6 +46,12 @@
 		"bindings": {
 			"ctrl-w": "editor::SelectLargerSyntaxNode",
 			"ctrl-shift-w": "editor::SelectSmallerSyntaxNode"
+		}
+	},
+	{
+		"context": "ProjectPanel && not_editing",
+		"bindings": {
+			"shift-a": "project_panel::NewFile"
 		}
 	}
 ]

@@ -1,8 +1,10 @@
 {
-	"features": {
-		"edit_prediction_provider": "zed"
-	},
-	"buffer_font_family": "BlexMono Nerd Font Mono",
+	"languages": {
+  "Rust": {
+   "show_edit_predictions": false
+  }
+ },
+ "buffer_font_family": "BlexMono Nerd Font Mono",
 	"buffer_font_size": 15,
 	"hard_tabs": true,
 	"vim_mode": true,
@@ -24,25 +26,5 @@
 		"mode": "system",
 		"light": "One Light",
 		"dark": "Catppuccin Mocha"
-	},
-	"languages": {
-		"Rust": {
-   "show_edit_predictions": false
-  },
-  "Python": {
-			"language_servers": ["pylsp", "!pyright", "..."]
-		}
-	},
-	"lsp": {
-		"pylsp": {
-			"settings": {
-				"plugins": {
-					"pycodestyle": {
-						"enabled": true,
-						"ignore": ["E501", "W191", "E101"]
-					}
-				}
-			}
-		}
 	}
 }
